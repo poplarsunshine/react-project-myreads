@@ -1,7 +1,7 @@
 import React from 'react'
 import ListBooks from './ListBooks.js'
 import SearchBook from './SearchBook.js'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -12,6 +12,10 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
+     currentlyReadingBooks: [],
+     wantToReadBooks: [],
+     readBooks: [],
+
     showSearchPage: false
   }
 
@@ -25,8 +29,38 @@ class BooksApp extends React.Component {
     this.setState({showSearchPage: false})
   }
 
+  getAll = () => {
+    BooksAPI.getAll().then(
+      (books) => {
+        const currently = books.filter((book) => {return (book.shelf === 'currentlyReading')})
+        const wantTo = books.filter((book) => {return (book.shelf === 'wantToRead')})
+        const read = books.filter((book) => {return (book.shelf === 'read')})
+        this.setState({
+          currentlyReadingBooks: currently,
+          wantToReadBooks: wantTo,
+          readBooks: read
+        })
+      }
+    )
+  }
+
+  componentDidMount() {
+    this.getAll();
+  }
+
   render() {
-    return (this.state.showSearchPage ? <SearchBook onBackAction={this.closeSearch} /> : <ListBooks onAddAction={this.pageToSearch} />)
+    return (this.state.showSearchPage ?
+      <SearchBook
+        onBackAction={this.closeSearch}
+      />
+      :
+      <ListBooks
+        currentlyReadingBooks={this.state.currentlyReadingBooks}
+        wantToReadBooks={this.state.wantToReadBooks}
+        readBooks={this.state.readBooks}
+        onAddAction={this.pageToSearch}
+      />
+    )
   }
 
   // render() {
