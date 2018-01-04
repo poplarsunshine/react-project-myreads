@@ -33,7 +33,7 @@ class BooksApp extends React.Component {
 
   // network
   updateBook = (book, shelf) => {
-    console.log('updateBook req');
+    console.log('updateBook req shelf', shelf);
     BooksAPI.update(book, shelf).then(
       (data) => {
         console.log('updateBook res:', data);
