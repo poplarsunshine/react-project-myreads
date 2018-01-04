@@ -36,7 +36,7 @@ class ListBooks extends React.Component {
                           <BookSelect theBook={book} onSelectBookShelf={(book, shelf) => {onChangeBookState(book, shelf)}}/>
                         </div>
                       <div className="book-title">{book.title}</div>
-                      <div className="book-authors">authors</div>
+                      <div className="book-authors">{book.authors}</div>
                     </div>
                   </li>
                 ))}
@@ -55,7 +55,7 @@ class ListBooks extends React.Component {
                           <BookSelect theBook={book} onSelectBookShelf={(book, shelf) => {onChangeBookState(book, shelf)}}/>
                         </div>
                       <div className="book-title">{book.title}</div>
-                      <div className="book-authors">authors</div>
+                      <div className="book-authors">{book.authors}</div>
                     </div>
                   </li>
                 ))}
@@ -74,7 +74,7 @@ class ListBooks extends React.Component {
                           <BookSelect theBook={book} onSelectBookShelf={(book, shelf) => {onChangeBookState(book, shelf)}}/>
                         </div>
                       <div className="book-title">{book.title}</div>
-                      <div className="book-authors">authors</div>
+                      <div className="book-authors">{book.authors}</div>
                     </div>
                   </li>
                 ))}

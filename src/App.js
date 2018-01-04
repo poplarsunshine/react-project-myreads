@@ -28,7 +28,7 @@ class BooksApp extends React.Component {
     console.log('closeSearch');
     this.setState({showSearchPage: false})
 
-    this.getBook('sJf1vQAACAAJ')
+    // this.getBook('sJf1vQAACAAJ')
   }
 
   // network
