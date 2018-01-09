@@ -1,6 +1,7 @@
 import React from 'react'
-import BookSelect from './BookSelect.js'
+// import BookSelect from './BookSelect.js'
 import ListSearchResult from './ListSearchResult.js'
+import {Link} from 'react-router-dom'
 
 import * as BooksAPI from './BooksAPI'
 
@@ -16,18 +17,23 @@ class SearchBook extends React.Component {
     this.setState(
       {keyword : text}
     )
-    this.serrchBook(text)
+    this.searchBook(text)
   }
 
-  updateBook = () => {
-
+  updateBook = (book, shelf) => {
+    console.log('search updateBook req shelf', shelf);
+    BooksAPI.update(book, shelf).then(
+      (data) => {
+        console.log('updateBook res:', data);
+      }
+    )
   }
 
-  serrchBook = (query) => {
-    console.log('serrchBook req query=', query);
+  searchBook = (query) => {
+    console.log('searchBook req query=', query);
     BooksAPI.search(query).then(
       (books) => {
-        console.log('serrchBook res books=', books);
+        console.log('searchBook res books=', books);
         if (books.error) {
           this.setState(
             {books : []}
@@ -48,7 +54,7 @@ class SearchBook extends React.Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a className="close-search" onClick={() => {onBackAction()}}>Close</a>
+          <Link className="close-search" onClick={() => {onBackAction()}} to='/'>Close</Link>
           <div className="search-books-input-wrapper">
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BookSelect from './BookSelect.js'
+import {Link} from 'react-router-dom'
 
 import './App.css'
 
@@ -84,7 +85,10 @@ class ListBooks extends React.Component {
           </div>
         </div>
         <div className="open-search">
-          <a onClick={() => {onAddAction()}}>Add a book</a>
+          <Link
+            to='/search'
+            onClick={() => {onAddAction()}}
+          >Add a book</Link>
         </div>
       </div>
     )

@@ -10,7 +10,7 @@ class ListSearchResult extends React.Component {
   }
 
   static propTypes = {
-    // books : PropTypes.object.isRequired,
+    books : PropTypes.object.isRequired,
   }
 
   render () {
