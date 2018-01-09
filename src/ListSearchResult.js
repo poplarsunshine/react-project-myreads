@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BookSelect from './BookSelect.js'
+import Book from './Book.js'
 
 import './App.css'
 
@@ -21,14 +21,7 @@ class ListSearchResult extends React.Component {
         <ol className="books-grid">
         {books.map((book) => (
           <li key={book.id}>
-            <div className="book">
-              <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                  <BookSelect theBook={book} onSelectBookShelf={(book, shelf) => {onChangeBookState(book, shelf)}}/>
-                </div>
-              <div className="book-title">{book.title}</div>
-              <div className="book-authors">{book.authors}</div>
-            </div>
+            <Book book={book} onSelectBookShelf={(book, shelf) => {onChangeBookState(book, shelf)}}/>
           </li>
         ))}
         </ol>
