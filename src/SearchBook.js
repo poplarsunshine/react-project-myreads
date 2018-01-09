@@ -22,11 +22,14 @@ class SearchBook extends React.Component {
 
   updateBook = (book, shelf) => {
     console.log('search updateBook req shelf', shelf);
-    BooksAPI.update(book, shelf).then(
-      (data) => {
-        console.log('updateBook res:', data);
-      }
-    )
+    // BooksAPI.update(book, shelf).then(
+    //   (data) => {
+    //     console.log('updateBook res:', data);
+    //   }
+    // )
+
+    if (this.props.onChangeBookState)
+      this.props.onChangeBookState(book, shelf)
   }
 
   searchBook = (query) => {
@@ -48,8 +51,10 @@ class SearchBook extends React.Component {
   }
 
   render () {
-    const {onBackAction} = this.props
+    const {myReads, onBackAction, onChangeBookState} = this.props
     const {keyword, books} = this.state
+
+    console.log('searchBook render myReads=', myReads);
 
     return (
       <div className="search-books">

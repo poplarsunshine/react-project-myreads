@@ -17,18 +17,15 @@ class BooksApp extends React.Component {
      wantToReadBooks: [],
      readBooks: [],
 
-    showSearchPage: false
+     myReads: []
   }
 
   pageToSearch = () => {
     console.log('pageToSearch');
-    this.setState({showSearchPage: true})
   }
 
   closeSearch = () => {
     console.log('closeSearch');
-    this.setState({showSearchPage: false})
-
     this.getAll()
   }
 
@@ -63,7 +60,8 @@ class BooksApp extends React.Component {
         this.setState({
           currentlyReadingBooks: currently,
           wantToReadBooks: wantTo,
-          readBooks: read
+          readBooks: read,
+          myReads: books
         })
       }
     )
@@ -74,20 +72,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    // return (this.state.showSearchPage ?
-    //   <SearchBook
-    //     onBackAction={this.closeSearch}
-    //   />
-    //   :
-    //   <ListBooks
-    //     currentlyReadingBooks={this.state.currentlyReadingBooks}
-    //     wantToReadBooks={this.state.wantToReadBooks}
-    //     readBooks={this.state.readBooks}
-    //     onAddAction={this.pageToSearch}
-    //     onChangeBookState={this.updateBook}
-    //   />
-    // )
-
     return (
       <div>
         <Route exact path='/' render={()=>(
@@ -101,12 +85,13 @@ class BooksApp extends React.Component {
         )}/>
         <Route path='/search' render={({ history })=>(
           <SearchBook
+            myReads={this.state.myReads}
             onBackAction={() => {
               console.log('closeSearch');
-              this.setState({showSearchPage: false})
               this.getAll()
               history.push('/')
             }}
+            onChangeBookState={this.updateBook}
           />
         )}/>
       </div>
