@@ -51,10 +51,19 @@ class SearchBook extends React.Component {
   }
 
   render () {
-    const {myReads, onBackAction, onChangeBookState} = this.props
+    const {myReads, onBackAction} = this.props
     const {keyword, books} = this.state
 
     console.log('searchBook render myReads=', myReads);
+    const matchBooks = books.map((book) => {
+      book.shelf = 'none'
+      myReads.forEach((eachBook) => {
+        if (eachBook.id == book.id)
+          book.shelf = eachBook.shelf
+      })
+      return book
+    })
+    console.log('searchBook render matchBooks=', matchBooks);
 
     return (
       <div className="search-books">
@@ -79,7 +88,7 @@ class SearchBook extends React.Component {
         </div>
 
         <ListSearchResult
-          books={books}
+          books={matchBooks}
           onChangeBookState={this.updateBook}
         />
       </div>

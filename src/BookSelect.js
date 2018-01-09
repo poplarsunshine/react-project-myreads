@@ -12,6 +12,7 @@ class BookSelect extends React.Component {
   render () {
     const {theBook, onSelectBookShelf} = this.props
     const shelf = theBook && theBook.shelf
+    console.log('BookSelect shelf', shelf);
 
     return (
       <div className="book-shelf-changer">
@@ -23,7 +24,8 @@ class BookSelect extends React.Component {
           {shelf !== "wantToRead" && <option value="wantToRead"         >Want to Read</option>}
           {shelf === "read" && <option value="read" selected>Read</option>}
           {shelf !== "read" && <option value="read"         >Read</option>}
-          <option value="none">None</option>
+          {shelf === "none" && <option value="none" selected>None</option>}
+          {shelf !== "none" && <option value="none"         >None</option>}
         </select>
       </div>
     )
